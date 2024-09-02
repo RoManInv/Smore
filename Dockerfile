@@ -1,5 +1,5 @@
 # Using official ubuntu image as a parent image
-FROM ubuntu:latest
+FROM ubuntu:jammy
 
 # Setting the working directory to /app
 WORKDIR /Smore
@@ -16,7 +16,7 @@ RUN apt-get install --assume-yes --no-install-recommends --quiet \
     curl \
     gcc \
     build-essential \
-    python3-dev\
+    python3.10-dev\
     python3-pip \
     wget \
     unzip \
