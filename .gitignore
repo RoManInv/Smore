@@ -3,3 +3,5 @@ models/*
 .cache/*
 **/__pycache__/*
 .idea/*
+**/benchmarks - Backup.csv
+eval_res/*.csv

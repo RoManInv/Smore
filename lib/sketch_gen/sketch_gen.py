@@ -30,8 +30,8 @@ class SketchGenerator:
         self.executor = executor
         self.nlp_func = executor.nlp_engine
         self.gpt_func = {
-            'code-davinci-002': lambda x: self.nlp_func.call_gpt3_and_get_answer(x, self.mode, 'code-davinci-002'),
-            'text-davinci-003': lambda x: self.nlp_func.call_gpt3_and_get_answer(x, self.mode, 'text-davinci-003'),
+            # 'code-davinci-002': lambda x: self.nlp_func.call_gpt3_and_get_answer(x, self.mode, 'code-davinci-002'),
+            # 'text-davinci-003': lambda x: self.nlp_func.call_gpt3_and_get_answer(x, self.mode, 'text-davinci-003'),
             'gpt-3.5-turbo': lambda x: self.nlp_func.call_gpt3_and_get_answer(x, self.mode, 'gpt-3.5-turbo')
         }
 

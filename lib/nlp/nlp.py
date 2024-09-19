@@ -57,7 +57,8 @@ class NLPFunc:
         self.sbert_cache: Dict[str, Any] = {}
         self.byte_tokenizer = ByteLevel()
         self.gpt3 = GPT(os.getenv("OPENAI_API_KEY"))
-        self.gpt3_entity_model = 'text-davinci-003'
+        # self.gpt3_entity_model = 'text-davinci-003'
+        self.gpt3_entity_model = 'gpt-3.5-turbo'
         self.datamuse = Datamuse()
         # self.wiki = wikipediaapi.Wikipedia('en')
         self.wiki = None
@@ -82,13 +83,13 @@ class NLPFunc:
     Following are gpt-3 related
     probably need to add something else 
     """
-    def call_gpt(self, prompt: str, temperature=0, max_token=256, stop=None, model='text-davinci-003') -> Dict:
+    def call_gpt(self, prompt: str, temperature=0, max_token=256, stop=None, model='gpt-3.5-turbo') -> Dict:
         if temperature == 0:
             return self.call_gpt_deterministic(prompt, max_token, stop, model)
         else:
             return self.gpt3.call(prompt, max_token, temperature, stop, model)
 
-    @cache(ignore_args=[0])
+    # @cache(ignore_args=[0])
     def call_gpt_deterministic(self, prompt: str, max_token: int, stop, model: str) -> Dict:
         if not config.AE:
             response = self.gpt3.call(prompt, max_token, 0, stop, model)

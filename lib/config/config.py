@@ -8,7 +8,8 @@ SEED = 66
 random.seed(SEED)
 
 
-AE = True
+# AE = True
+AE = False
 
 
 # Credentials for Google Sheet API

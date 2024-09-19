@@ -67,7 +67,7 @@ if __name__ == '__main__':
     print('args: {}'.format(args))
 
     # read benchmark here first
-    benchmark_engine = BenchmarkResultEngine(args.eval_sheet_name, args.eval_worksheet_name, benchmark_size=50)
+    benchmark_engine = BenchmarkResultEngine(args.eval_sheet_name, args.eval_worksheet_name, benchmark_size=8)
 
     if args.test_sketch_gen:
         # test sketch generator with different prompt version and model
@@ -226,8 +226,8 @@ if __name__ == '__main__':
                 print('Evaluating benchmark {}'.format(benchmark.bid))
                 synthesizer = TopLevelSynthesizer(executor, args.depth, args.no_type, args.no_type_system, args.no_decomp, args.no_repair, args.prompt_version)
                 executor.context = {}
-                signal.signal(signal.SIGALRM, handle_timeout)
-                signal.alarm(args.timeout)
+                # signal.signal(signal.SIGALRM, handle_timeout)
+                if(not 'nt' in os.name): signal.alarm(args.timeout)
                 try:
                     if args.no_sketch:
                         res = synthesizer.synthesize_no_sketch(benchmark.task)
@@ -236,12 +236,13 @@ if __name__ == '__main__':
                     res.bid = benchmark.bid
                 except TimeoutError:
                     res = EvalRes(benchmark.task, 'TIMEOUT', args.timeout, 0, '', '', benchmark.bid)
-                    signal.alarm(0)
+                    if(not 'nt' in os.name): signal.alarm(0)
                 except TimeOutException:
                     res = EvalRes(benchmark.task, 'TIMEOUT', args.timeout, 0, '', '', benchmark.bid)
-                    signal.alarm(0)
+                    if(not 'nt' in os.name): signal.alarm(0)
                 finally:
-                    signal.alarm(0)
+                    pass
+                    if(not 'nt' in os.name): signal.alarm(0)
 
                 results.append(res)
             except StopIteration:

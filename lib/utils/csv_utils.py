@@ -8,7 +8,9 @@ import csv
 import sys
 from typing import Dict, List
 
-csv.field_size_limit(sys.maxsize)
+# print(sys.maxsize)
+# 2147483647
+csv.field_size_limit(2147483647)
 
 
 def get_column_list_from_dict(data: List[Dict], col_name: str) -> List:
