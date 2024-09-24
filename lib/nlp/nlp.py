@@ -542,7 +542,12 @@ class NLPFunc:
             if 'TIME' not in ents_dict and time_match:
                 if '-' in context and ':' in context:
                     split_string = context.split(' ')
-                    time_str = find_date(split_string[1])[0][0]
+                    idx = -1
+                    if len(split_string) >= 2:
+                        idx = 1
+                    else:
+                        idx = 0
+                    time_str = find_date(split_string[idx])[0][0]
                     time_start_idx = context.index(time_str)
                     time_span = (time_start_idx, time_start_idx + len(time_str))
                     matched_spans.append(time_span)
